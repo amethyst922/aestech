@@ -246,30 +246,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const homeFilterItems = document.querySelectorAll('.home-filter-item');
   const homeCarousel = document.getElementById('home-products-carousel');
 
-  // Mock data for different categories
+  // Data for different categories using real images from folders
   const categoryContent = {
     skin: [
-      { id: 'home-p1', title: 'Acne series', img: 'home-p1' },
-      { id: 'home-p2', title: 'Whitening series', img: 'home-p2' },
-      { id: 'home-p3', title: 'Anti aging series', img: 'home-p3' },
-      { id: 'home-p4', title: 'Sensitive series', img: 'home-p4' }
+      { id: 'home-p1', title: 'Acne Series', imgPath: 'images/Skin/Acne Series/Skin Care_30.png' },
+      { id: 'home-p2', title: 'Whitening Series', imgPath: 'images/Skin/Whitening Series/Skin Care_56.png' },
+      { id: 'home-p3', title: 'Anti Aging Series', imgPath: 'images/Skin/Anti Aging Series/Skin Care_13.png' },
+      { id: 'home-p4', title: 'Sensitive Series', imgPath: 'images/Skin/Sensitive Series/Skin Care_21.png' }
     ],
     body: [
-      { id: 'home-p5', title: 'Body Firming', img: 'catalog-p6' },
-      { id: 'home-p6', title: 'Hand Care', img: 'catalog-p3' },
-      { id: 'home-p7', title: 'Body Scrub', img: 'home-p1' }
+      { id: 'home-p5', title: 'Body Care Series', imgPath: 'images/Body/Body Care Series/Skin Care_38.png' },
+      { id: 'home-p6', title: 'Body Care Series', imgPath: 'images/Body/Body Care Series/Skin Care_39.png' },
+      { id: 'home-p7', title: 'Body Care Series', imgPath: 'images/Body/Body Care Series/Skin Care_40.png' }
     ],
     hair: [
-      { id: 'home-p8', title: 'Scalp Treatment', img: 'catalog-p1' },
-      { id: 'home-p9', title: 'Nourishing Oil', img: 'catalog-p2' },
-      { id: 'home-p10', title: 'Growth Serum', img: 'catalog-p4' }
+      { id: 'home-p8', title: 'Scalp Care Series', imgPath: 'images/Hair/Scalp Care Series/Skin Care_48.png' },
+      { id: 'home-p9', title: 'Hair Growth Series', imgPath: 'images/Hair/Hair Growth Series/Skin Care_46.png' },
+      { id: 'home-p10', title: 'Scalp Care Series', imgPath: 'images/Hair/Scalp Care Series/Skin Care_49.png' }
     ],
     all: [
-      { id: 'home-p1', title: 'Acne series', img: 'home-p1' },
-      { id: 'home-p2', title: 'Whitening series', img: 'home-p2' },
-      { id: 'home-p3', title: 'Anti aging series', img: 'home-p3' },
-      { id: 'home-p5', title: 'Body Firming', img: 'catalog-p6' },
-      { id: 'home-p8', title: 'Scalp Treatment', img: 'catalog-p1' }
+      { id: 'home-p1', title: 'Acne Series', imgPath: 'images/Skin/Acne Series/Skin Care_30.png' },
+      { id: 'home-p5', title: 'Body Care', imgPath: 'images/Body/Body Care Series/Skin Care_38.png' },
+      { id: 'home-p8', title: 'Scalp Care', imgPath: 'images/Hair/Scalp Care Series/Skin Care_48.png' },
+      { id: 'home-p2', title: 'Whitening', imgPath: 'images/Skin/Whitening Series/Skin Care_56.png' }
     ]
   };
 
@@ -297,13 +296,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const items = categoryContent[category] || categoryContent['skin'];
 
-      // Rebuild HTML
       let html = '';
       items.forEach(item => {
         html += `
-          <div class="home-product-card">
-            <div class="home-product-image">
-              <img src="" alt="${item.title}" id="${item.id}_dynamic">
+          <div class="home-product-wrapper">
+            <div class="home-product-card">
+              <div class="home-product-image">
+                <img src="${item.imgPath}" alt="${item.title}" id="${item.id}_dynamic">
+              </div>
             </div>
             <p class="home-product-title">${item.title}</p>
           </div>
@@ -312,23 +312,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Add end card
       html += `
-        <div class="home-product-card end-card">
-          <div class="end-card-content">
-            <a href="products.html" class="discover-btn">Discover more →</a>
+        <div class="home-product-wrapper">
+          <div class="home-product-card end-card">
+            <div class="end-card-content">
+              <a href="products.html" class="discover-btn">Discover more →</a>
+            </div>
           </div>
         </div>
       `;
 
       homeCarousel.innerHTML = html;
 
-      // Regenerate placeholders for new dynamic items
+      // Prevent default drag on the dynamic images
       items.forEach(item => {
         const img = document.getElementById(`${item.id}_dynamic`);
-        // Find config for this image or use a default
-        const config = imageConfigs.find(c => c.id === item.img) || imageConfigs[0];
-        if (img && config) {
-          createPlaceholderImage(img, config.gradient, config.text || item.title);
-          // Also prevent default drag on the dynamic image
+        if (img) {
           img.addEventListener('dragstart', (e) => e.preventDefault());
         }
       });
