@@ -318,6 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <a href="products.html" class="discover-btn">Discover more →</a>
             </div>
           </div>
+          <p class="home-product-title" style="visibility: hidden;">&nbsp;</p>
         </div>
       `;
 
@@ -334,16 +335,21 @@ document.addEventListener('DOMContentLoaded', () => {
       // Fade in
       homeCarousel.style.opacity = '1';
 
-      // Re-initialize drag support for new content
-      initCarouselDrag();
+      // Re-initialize drag support if needed (actually initDrag is on container)
     }, 300);
   }
+
+  // Initial load
+  updateCarousel('skin');
 
   // ===================================
   // Carousel Drag Support (Sleek Momentum Edition)
   // ===================================
-  function initCarouselDrag() {
-    if (!homeCarousel) return;
+  // ===================================
+  // Reusable Carousel Drag Support
+  // ===================================
+  function initDrag(element) {
+    if (!element) return;
 
     let isDown = false;
     let startX;
@@ -362,50 +368,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const beginMomentum = () => {
       if (Math.abs(velocity) < 0.5) return;
 
-      homeCarousel.scrollLeft -= velocity;
+      element.scrollLeft -= velocity;
       velocity *= 0.95; // Friction
 
       animationId = requestAnimationFrame(beginMomentum);
     };
 
     // Prevent default browser image dragging
-    homeCarousel.querySelectorAll('img').forEach(img => {
+    element.querySelectorAll('img').forEach(img => {
       img.addEventListener('dragstart', (e) => e.preventDefault());
     });
 
-    homeCarousel.addEventListener('mousedown', (e) => {
-      // If clicking a link, we still want to allow dragging but might need to prevent the click
-      // if a drag actually happened.
+    element.addEventListener('mousedown', (e) => {
       isDown = true;
-      homeCarousel.classList.add('active-drag');
-      startX = e.pageX - homeCarousel.offsetLeft;
-      scrollLeft = homeCarousel.scrollLeft;
+      element.classList.add('active-drag');
+      startX = e.pageX - element.offsetLeft;
+      scrollLeft = element.scrollLeft;
       lastX = e.pageX;
       velocity = 0;
       stopMomentum();
     });
 
-    homeCarousel.addEventListener('mouseleave', () => {
+    element.addEventListener('mouseleave', () => {
       if (isDown) {
         isDown = false;
-        homeCarousel.classList.remove('active-drag');
+        element.classList.remove('active-drag');
         beginMomentum();
       }
     });
 
-    homeCarousel.addEventListener('mouseup', () => {
+    element.addEventListener('mouseup', () => {
       isDown = false;
-      homeCarousel.classList.remove('active-drag');
+      element.classList.remove('active-drag');
       beginMomentum();
     });
 
-    homeCarousel.addEventListener('mousemove', (e) => {
+    element.addEventListener('mousemove', (e) => {
       if (!isDown) return;
       e.preventDefault();
 
-      const x = e.pageX - homeCarousel.offsetLeft;
+      const x = e.pageX - element.offsetLeft;
       const walk = (x - startX);
-      homeCarousel.scrollLeft = scrollLeft - walk;
+      element.scrollLeft = scrollLeft - walk;
 
       // Track velocity
       velocity = e.pageX - lastX;
@@ -413,33 +417,90 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Touch events
-    homeCarousel.addEventListener('touchstart', (e) => {
+    element.addEventListener('touchstart', (e) => {
       isDown = true;
-      startX = e.touches[0].pageX - homeCarousel.offsetLeft;
-      scrollLeft = homeCarousel.scrollLeft;
+      startX = e.touches[0].pageX - element.offsetLeft;
+      scrollLeft = element.scrollLeft;
       lastX = e.touches[0].pageX;
       velocity = 0;
       stopMomentum();
     }, { passive: true });
 
-    homeCarousel.addEventListener('touchend', () => {
+    element.addEventListener('touchend', () => {
       isDown = false;
       beginMomentum();
     }, { passive: true });
 
-    homeCarousel.addEventListener('touchmove', (e) => {
+    element.addEventListener('touchmove', (e) => {
       if (!isDown) return;
-      const x = e.touches[0].pageX - homeCarousel.offsetLeft;
+      const x = e.touches[0].pageX - element.offsetLeft;
       const walk = (x - startX);
-      homeCarousel.scrollLeft = scrollLeft - walk;
+      element.scrollLeft = scrollLeft - walk;
 
       velocity = e.touches[0].pageX - lastX;
       lastX = e.touches[0].pageX;
     }, { passive: true });
   }
 
-  // Initial call
-  initCarouselDrag();
+  // Initialize Product Carousel
+  initDrag(homeCarousel);
+
+  // ===================================
+  // Testimonial Carousel Logic
+  // ===================================
+  const testimonialTrack = document.getElementById('testimonial-track');
+  const testimonialProgress = document.getElementById('testimonial-progress-fill');
+  const carouselTestimonialCards = document.querySelectorAll('.testimonial-card');
+
+  if (testimonialTrack && testimonialProgress) {
+    // Enable Drag
+    initDrag(testimonialTrack);
+
+    // Progress Bar and Active State Logic
+    testimonialTrack.addEventListener('scroll', () => {
+      const scrollLeft = testimonialTrack.scrollLeft;
+      const maxScroll = testimonialTrack.scrollWidth - testimonialTrack.clientWidth;
+
+      // Update Progress Bar
+      // Simple ratio: scroll / max
+      const percent = (scrollLeft / maxScroll) * 100;
+      // We want the fill to move. The fill width is 33% (approx 1/3).
+      // If we move left, it goes from 0% to 66% (100% - 33%).
+      const maxTranslate = 100 - 33;
+      const movePercent = (scrollLeft / maxScroll) * maxTranslate;
+      testimonialProgress.style.left = `${Math.min(Math.max(movePercent, 0), maxTranslate)}%`;
+
+      // Update Active State
+      // Find which card is closest to the left edge
+      carouselTestimonialCards.forEach(card => {
+        const cardLeft = card.offsetLeft;
+        const cardWidth = card.offsetWidth;
+        // Adjust threshold as needed
+        if (cardLeft >= scrollLeft - cardWidth / 2 && cardLeft < scrollLeft + cardWidth / 2) {
+          carouselTestimonialCards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+        }
+      });
+    });
+
+    // Arrow Controls
+    const prevBtn = document.getElementById('prev-testimonial');
+    const nextBtn = document.getElementById('next-testimonial');
+
+    if (prevBtn && nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const cardWidth = carouselTestimonialCards[0].offsetWidth;
+        const gap = 32; // var(--space-md)
+        testimonialTrack.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
+      });
+
+      prevBtn.addEventListener('click', () => {
+        const cardWidth = carouselTestimonialCards[0].offsetWidth;
+        const gap = 32; // var(--space-md)
+        testimonialTrack.scrollBy({ left: -(cardWidth + gap), behavior: 'smooth' });
+      });
+    }
+  }
 
   // ===================================
   // Generate Placeholder Images
