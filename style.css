@@ -1582,23 +1582,7 @@ p {
   background-position: center;
 }
 
-#banner-bg-1 {
-  background-image: url('images/slider-1.png');
-  background-position: center center;
-  background-size: cover;
-}
-
-#banner-bg-2 {
-  background-image: url('images/slider-2.png');
-  background-position: bottom center;
-  background-size: cover;
-}
-
-#banner-bg-3 {
-  background-image: url('images/slider-3.png');
-  background-position: center center;
-  background-size: cover;
-}
+/* Background images handled by inline styles in products.html */
 
 .banner-overlay {
   position: absolute;
