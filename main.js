@@ -678,4 +678,27 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('%cAESTECH', 'font-size: 48px; font-weight: 400; font-family: "Outfit", sans-serif; color: #000;');
   console.log('%cLaboratory-Crafted Skincare Excellence', 'font-size: 14px; font-weight: 300; font-family: "Inter", sans-serif; color: #4A4A4A; letter-spacing: 0.1em;');
 
+  // ===================================
+  // Mobile Navigation Toggle
+  // ===================================
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
 });
