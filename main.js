@@ -382,8 +382,28 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   homeFilterItems.forEach(item => {
-    item.addEventListener('click', () => {
-      // update active state
+    item.addEventListener('click', (e) => {
+      const parentNode = item.closest('.home-filter-node');
+
+      // If it's a main category with sub-filters, toggle it
+      if (parentNode) {
+        const isCurrentlyActive = parentNode.classList.contains('active');
+
+        // Close other nodes
+        document.querySelectorAll('.home-filter-node').forEach(node => {
+          if (node !== parentNode) node.classList.remove('active');
+        });
+
+        // Toggle current node
+        parentNode.classList.toggle('active');
+      } else {
+        // If "All Categories" is clicked, close all dropdowns
+        document.querySelectorAll('.home-filter-node').forEach(node => {
+          node.classList.remove('active');
+        });
+      }
+
+      // Update active state for styling
       homeFilterItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
 
