@@ -376,16 +376,16 @@ document.addEventListener('DOMContentLoaded', () => {
       { id: 'home-p4', title: 'Vitamin C Glow Serum', imgPath: 'images/Skin/Whitening Series/Skin Care_61.png' }
     ],
     'anti-aging': [
-      { id: 'home-p1', title: 'Anti Aging Series', imgPath: 'images/Skin/Anti Aging Series/Skin Care_13.png' },
-      { id: 'home-p2', title: 'Anti Aging Series', imgPath: 'images/Skin/Anti Aging Series/Skin Care_14.png' },
-      { id: 'home-p3', title: 'Anti Aging Series', imgPath: 'images/Skin/Anti Aging Series/Skin Care_15.png' },
-      { id: 'home-p4', title: 'Anti Aging Series', imgPath: 'images/Skin/Anti Aging Series/Skin Care_16.png' }
+      { id: 'home-p1', title: 'Eternal Youth Elixir', imgPath: 'images/Skin/Anti Aging Series/Skin Care_13.png' },
+      { id: 'home-p2', title: 'Firming Neck Cream', imgPath: 'images/Skin/Anti Aging Series/Skin Care_14.png' },
+      { id: 'home-p3', title: 'Retinol Night Restore', imgPath: 'images/Skin/Anti Aging Series/Skin Care_15.png' },
+      { id: 'home-p4', title: 'Collagen Boost Ampoule', imgPath: 'images/Skin/Anti Aging Series/Skin Care_16.png' }
     ],
     sensitive: [
-      { id: 'home-p1', title: 'Sensitive Series', imgPath: 'images/Skin/Sensitive Series/Skin Care_21.png' },
-      { id: 'home-p2', title: 'Sensitive Series', imgPath: 'images/Skin/Sensitive Series/Skin Care_22.png' },
-      { id: 'home-p3', title: 'Sensitive Series', imgPath: 'images/Skin/Sensitive Series/Skin Care_23.png' },
-      { id: 'home-p4', title: 'Sensitive Series', imgPath: 'images/Skin/Sensitive Series/Skin Care_25.png' }
+      { id: 'home-p1', title: 'Gentle Calm Moisturizer', imgPath: 'images/Skin/Sensitive Series/Skin Care_21.png' },
+      { id: 'home-p2', title: 'Soothing Barrier Cream', imgPath: 'images/Skin/Sensitive Series/Skin Care_22.png' },
+      { id: 'home-p3', title: 'Hypoallergenic Wash', imgPath: 'images/Skin/Sensitive Series/Skin Care_23.png' },
+      { id: 'home-p4', title: 'Redness Relief Serum', imgPath: 'images/Skin/Sensitive Series/Skin Care_25.png' }
     ],
     body: [
       { id: 'home-p5', title: 'Body Care Series', imgPath: 'images/Body/Body Care Series/Skin Care_38.png' },
