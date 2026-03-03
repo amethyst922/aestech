@@ -364,10 +364,10 @@ document.addEventListener('DOMContentLoaded', () => {
       { id: 'home-p4', title: 'Sensitive Series', imgPath: 'images/Skin/Sensitive Series/Skin Care_21.png' }
     ],
     acne: [
-      { id: 'home-p1', title: 'Acne Series', imgPath: 'images/Skin/Acne Series/Skin Care_30.png' },
-      { id: 'home-p2', title: 'Acne Series', imgPath: 'images/Skin/Acne Series/Skin Care_31.png' },
-      { id: 'home-p3', title: 'Acne Series', imgPath: 'images/Skin/Acne Series/Skin Care_32.png' },
-      { id: 'home-p4', title: 'Acne Series', imgPath: 'images/Skin/Acne Series/Skin Care_35.png' }
+      { id: 'home-p1', title: 'Clear Balance Serum', imgPath: 'images/Skin/Acne Series/Skin Care_30.png' },
+      { id: 'home-p2', title: 'Purifying Acne Cleanser', imgPath: 'images/Skin/Acne Series/Skin Care_31.png' },
+      { id: 'home-p3', title: 'Blemish Control Gel', imgPath: 'images/Skin/Acne Series/Skin Care_32.png' },
+      { id: 'home-p4', title: 'Pore Refining Toner', imgPath: 'images/Skin/Acne Series/Skin Care_35.png' }
     ],
     whitening: [
       { id: 'home-p1', title: 'Whitening Series', imgPath: 'images/Skin/Whitening Series/Skin Care_56.png' },
@@ -403,11 +403,12 @@ document.addEventListener('DOMContentLoaded', () => {
       { id: 'home-p10', title: 'Scalp Care Series', imgPath: 'images/Hair/Scalp Care Series/Skin Care_49.png' }
     ],
     'scalp-care': [
-      { id: 'home-p8', title: 'Scalp Care Series', imgPath: 'images/Hair/Scalp Care Series/Skin Care_48.png' },
-      { id: 'home-p10', title: 'Scalp Care Series', imgPath: 'images/Hair/Scalp Care Series/Skin Care_49.png' }
+      { id: 'home-p8', title: 'Purifying Scalp Scrub', imgPath: 'images/Hair/Scalp Care Series/Skin Care_48.png' },
+      { id: 'home-p10', title: 'Balancing Scalp Tonic', imgPath: 'images/Hair/Scalp Care Series/Skin Care_49.png' }
     ],
     'hair-growth': [
-      { id: 'home-p9', title: 'Hair Growth Series', imgPath: 'images/Hair/Hair Growth Series/Skin Care_46.png' }
+      { id: 'home-p9', title: 'Vitality Growth Serum', imgPath: 'images/Hair/Hair Growth Series/Skin Care_46.png' },
+      { id: 'home-p10', title: 'Follicle Stimulating Shampoo', imgPath: 'images/Hair/Hair Growth Series/Skin Care_51.png' }
     ],
     all: [
       { id: 'home-p1', title: 'Acne Series', imgPath: 'images/Skin/Acne Series/Skin Care_30.png' },
