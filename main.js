@@ -407,8 +407,8 @@ document.addEventListener('DOMContentLoaded', () => {
       { id: 'home-p10', title: 'Balancing Scalp Tonic', imgPath: 'images/Hair/Scalp Care Series/Skin Care_49.png' }
     ],
     'hair-growth': [
-      { id: 'home-p9', title: 'Vitality Growth Serum', imgPath: 'images/Hair/Hair Growth Series/Skin Care_46.png' },
-      { id: 'home-p10', title: 'Follicle Stimulating Shampoo', imgPath: 'images/Hair/Hair Growth Series/Skin Care_51.png' }
+      { id: 'home-p9', title: 'Follicle Simulating Shampoo', imgPath: 'images/Hair/Hair Growth Series/Skin Care_46.png' },
+      { id: 'home-p10', title: 'Vitality Growth Serum', imgPath: 'images/Hair/Hair Growth Series/Skin Care_51.png' }
     ],
     all: [
       { id: 'home-p1', title: 'Acne Series', imgPath: 'images/Skin/Acne Series/Skin Care_30.png' },
